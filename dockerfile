@@ -1,6 +1,6 @@
 from node:alpine as builder_phase
 workdir '/app'
-copy package.json .
+COPY package*.json ./
 run npm install
 copy . .
 run npm run build
