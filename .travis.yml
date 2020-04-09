@@ -12,6 +12,7 @@ script:
   - docker run -e CI=true roccodevhf/docker-react npm run test
   
 deploy:
+  edge: true
   provider: elasticbeanstalk
   region: "eu-central-1"
   app: "docker-react"
@@ -20,7 +21,6 @@ deploy:
   bucket_path: "docker-react"
   on:
     branch: "master"
-    access_key_id: $ACCESS_KEY_ID
-    secret_access_key: 
-      secure: "$SECRET_ACCESS_KEY"
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
 
