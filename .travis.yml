@@ -1,6 +1,7 @@
 language: generic
 
 sudo: required
+
 services: 
   - docker
 
@@ -10,3 +11,16 @@ before_install:
 script:
   - docker run -e CI=true roccodevhf/docker-react npm run test
   
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "docker-react"
+  enviroment: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-222881772730"
+  bucket_path: "docker-react"
+  on:
+    branch: "master"
+    access_key_id: $ACCESS_KEY_ID
+    secret_access_key: 
+      secure: "$SECRET_ACCESS_KEY"
+
