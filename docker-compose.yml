@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web:
+    build:   # build: .  require dockfile 
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+    - /app/node_modules #use the directory created in the container
+    - .:/app #use a reference on the local files in the machine copied during the creation of the container
+  tests: #this service is added in order to see the update to the tests files on the fly when container is running
+    build:
+     context: .
+     dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm","run","test"]  
